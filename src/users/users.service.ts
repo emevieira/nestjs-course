@@ -64,7 +64,7 @@ export class UsersService {
     return userExist;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const userExist = await this.prisma.users.findFirst({
       where: { id },
     });
@@ -72,8 +72,20 @@ export class UsersService {
     if (!userExist) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    const { name, email } = updateUserDto;
-    return { name, email };
+
+    const data: Prisma.UsersUpdateInput = {
+      ...updateUserDto,
+      password: updateUserDto.password
+        ? await bcrypt.hash(updateUserDto.password, 10)
+        : undefined,
+    };
+
+    const updateUser = await this.prisma.users.update({ where: { id }, data });
+
+    return {
+      ...updateUser,
+      password: undefined,
+    };
   }
 
   async remove(id: string) {

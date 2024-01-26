@@ -14,12 +14,17 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Swagger - Aplicação de Teste')
-    .setDescription(
-      'O Swagger (aka OpenApi) é uma biblioteca muito conhecida no universo backend, estando disponível para diversas linguagens e frameworks. Ela gera um site interno no seu backend que descreve, com muitos detalhes, cada endpoint e estrutura de entidades presentes na sua aplicação.',
-    )
+    .setTitle('Swagger - Api Tech Filmes')
+    .setDescription('Essa api é do site Tech Filmes')
     .setVersion('1.0')
+    .addBearerAuth()
+    .setContact(
+      'Emerson Vieira',
+      'https://vieiradevcode.com.br',
+      'emevieira.dev@gmail.com',
+    )
     .addTag('auth')
+    .addTag('movies')
     .addTag('users')
     .build();
 

@@ -12,4 +12,66 @@ model Users {
   name     String
   email    String @unique
   password String
+
+  @@map("users")
+}
+
+model Categories {
+  categoryId String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  Movies     Movies[]
+  Series     Series[]
+
+  @@map("categories")
+}
+
+model Movies {
+  movieId     String   @id @default(uuid())
+  name        String
+  description String
+  releaseYear String
+  bannerUrl   String
+  imageUrl    String
+  trailerLink String
+  created_at  DateTime @default(now())
+
+  categoryId String
+  category   Categories @relation(fields: [categoryId], references: [categoryId])
+  Download   Download[]
+
+  @@map("movies")
+}
+
+model Series {
+  serieId     String   @id @default(uuid())
+  name        String
+  description String
+  releaseYear String
+  bannerUrl   String
+  imageUrl    String
+  trailerLink String
+  created_at  DateTime @default(now())
+
+  categoryId String
+  category   Categories @relation(fields: [categoryId], references: [categoryId])
+  Download   Download[]
+
+  @@map("series")
+}
+
+model Download {
+  downloadId   Int    @id @default(autoincrement())
+  provedorName String
+  linkDownload String
+
+  // Relação com a tabela de filmes
+  movie   Movies? @relation(fields: [movieId], references: [movieId])
+  movieId String?
+
+  // Relação com a tabela de séries
+  serie   Series? @relation(fields: [serieId], references: [serieId])
+  serieId String?
+
+  @@map("download")
 }
