@@ -1,7 +1,11 @@
-import { IsString } from 'class-validator';
-import { Movie } from '../entities/movie.entity';
+import { IsArray, IsString } from 'class-validator';
 
-export class CreateMovieDto extends Movie {
+class DownloadTypes {
+  provedorName: string;
+  linkDownload: string;
+}
+
+export class CreateMovieDto {
   /**
    * Nome do filme
    * @example Transformers
@@ -50,4 +54,7 @@ export class CreateMovieDto extends Movie {
    * */
   @IsString()
   releaseYear: string;
+
+  @IsArray()
+  downloads: DownloadTypes[];
 }

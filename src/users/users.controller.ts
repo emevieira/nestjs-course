@@ -8,7 +8,13 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+  getSchemaPath,
+} from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -16,6 +22,7 @@ import { User } from './entities/user.entity';
 
 @ApiTags('users')
 @Controller('api')
+@ApiBearerAuth()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -30,6 +37,7 @@ export class UsersController {
       $ref: getSchemaPath(User),
     },
   })
+  @ApiQuery({ name: 'filter', required: false })
   @Get('users')
   findAll(@Query('filter') filter?: string) {
     return this.usersService.findAll(filter);

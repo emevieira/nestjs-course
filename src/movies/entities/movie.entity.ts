@@ -1,3 +1,10 @@
+class DownloadTypes {
+  downloadId?: number;
+  provedorName: string;
+  linkDownload: string;
+  movieId?: string;
+}
+
 export class Movie {
   movieId?: string;
   name: string;
@@ -7,4 +14,5 @@ export class Movie {
   trailerLink: string;
   categoryId: string;
   releaseYear: string;
+  downloads: DownloadTypes[];
 }

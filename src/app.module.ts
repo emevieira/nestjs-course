@@ -7,9 +7,16 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { MoviesModule } from './movies/movies.module';
+import { DownloadsModule } from './downloads/downloads.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, AuthModule, MoviesModule],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    AuthModule,
+    MoviesModule,
+    DownloadsModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

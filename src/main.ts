@@ -24,6 +24,7 @@ async function bootstrap() {
       'emevieira.dev@gmail.com',
     )
     .addTag('auth')
+    .addTag('downloads')
     .addTag('movies')
     .addTag('users')
     .build();
