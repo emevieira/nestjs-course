@@ -11,7 +11,7 @@ export class DeleteMovieService {
     });
 
     if (!movieExist) {
-      throw new HttpException('Movie not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Filme não encontrado', HttpStatus.NOT_FOUND);
     }
 
     return this.prisma.movies.delete({

@@ -1,7 +1,6 @@
-export class Download {
-  downloadId?: number;
+export class MovieDownload {
+  movieDownloadId?: number;
   provedorName: string;
   linkDownload: string;
   movieId?: string;
-  serieId?: string;
 }

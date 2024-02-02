@@ -58,7 +58,7 @@ export class UsersService {
     });
 
     if (!userExist) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
     return userExist;
@@ -70,7 +70,7 @@ export class UsersService {
     });
 
     if (!userExist) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
     const data: Prisma.UsersUpdateInput = {
@@ -94,7 +94,7 @@ export class UsersService {
     });
 
     if (!userExist) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
     return this.prisma.users.delete({

@@ -2,9 +2,9 @@ export const DownloadRequest = {
   schema: {
     default: [
       {
-        downloadId: 'string',
+        movieDownloadId: 'string',
         provedorName: 'string',
-        movieId: 'string', //ou serieId
+        movieId: 'string',
       },
     ],
   },
@@ -13,7 +13,7 @@ export const DownloadRequest = {
 export const DownloadDeleteResponse = {
   schema: {
     default: {
-      downloadId: 'string',
+      movieDownloadId: 'string',
     },
   },
 };

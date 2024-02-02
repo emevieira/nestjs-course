@@ -14,7 +14,7 @@ export const MovieForId = {
   ],
   downloads: [
     {
-      downloadId: 0,
+      movieDownloadId: 0,
       provedorName: 'string',
       linkDownload: 'string',
     },
@@ -48,7 +48,7 @@ export const GetMoviesResponse = {
       releaseYear: 'string',
       downloads: [
         {
-          downloadId: 0,
+          movieDownloadId: 0,
           provedorName: 'string',
           linkDownload: 'string',
         },

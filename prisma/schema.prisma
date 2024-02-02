@@ -37,8 +37,8 @@ model Movies {
   created_at  DateTime @default(now())
 
   categoryId String
-  category   Categories @relation(fields: [categoryId], references: [categoryId])
-  Download   Download[]
+  category   Categories       @relation(fields: [categoryId], references: [categoryId])
+  Download   MovieDownloads[]
 
   @@map("movies")
 }
@@ -55,23 +55,42 @@ model Series {
 
   categoryId String
   category   Categories @relation(fields: [categoryId], references: [categoryId])
-  Download   Download[]
+  Seasons    Seasons[]
 
   @@map("series")
 }
 
-model Download {
-  downloadId   Int    @id @default(autoincrement())
-  provedorName String
-  linkDownload String
+model Seasons {
+  seasonId     String @id @default(uuid())
+  seasonNumber Int
+
+  serie           Series            @relation(fields: [serieId], references: [serieId])
+  serieId         String
+  seasonDownloads SeasonDownloads[]
+
+  @@map("season")
+}
+
+model MovieDownloads {
+  movieDownloadId Int    @id @default(autoincrement())
+  provedorName    String
+  linkDownload    String
 
   // Relação com a tabela de filmes
   movie   Movies? @relation(fields: [movieId], references: [movieId])
   movieId String?
 
-  // Relação com a tabela de séries
-  serie   Series? @relation(fields: [serieId], references: [serieId])
-  serieId String?
+  @@map("movieDownloads")
+}
 
-  @@map("download")
+model SeasonDownloads {
+  seasonDownloadId Int    @id @default(autoincrement())
+  provedorName     String
+  linkDownload     String
+
+  // Relação com a tabela de temporadas
+  season   Seasons? @relation(fields: [seasonId], references: [seasonId])
+  seasonId String?
+
+  @@map("seasonDownloads")
 }

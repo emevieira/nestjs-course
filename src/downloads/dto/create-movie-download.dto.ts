@@ -1,7 +1,7 @@
 import { IsOptional, IsString } from 'class-validator';
-import { Download } from '../entities/download.entity';
+import { MovieDownload } from '../entities/movie-download.entity';
 
-export class CreateDownloadDto extends Download {
+export class CreateDownloadDto extends MovieDownload {
   /**
    * Nome do provedor do download
    * @example Mega
@@ -23,12 +23,4 @@ export class CreateDownloadDto extends Download {
   @IsOptional()
   @IsString()
   movieId?: string;
-
-  /**
-   * Id da serie
-   * @example ea9d33da-a264-41e5-9fae-b9ee9d40e401
-   * */
-  @IsOptional()
-  @IsString()
-  serieId?: string;
 }

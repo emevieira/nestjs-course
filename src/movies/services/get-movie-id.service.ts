@@ -11,7 +11,7 @@ export class GetMovieService {
     });
 
     if (!movieExist) {
-      throw new HttpException('Movie not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Filme não encontrado', HttpStatus.NOT_FOUND);
     }
 
     const { categoryId } = movieExist;
@@ -20,7 +20,7 @@ export class GetMovieService {
       where: { categoryId },
     });
 
-    const filteredDownloads = await this.prisma.download.findMany({
+    const filteredDownloads = await this.prisma.movieDownloads.findMany({
       where: { movieId },
     });
 
@@ -32,7 +32,7 @@ export class GetMovieService {
         categoryName: c.name,
       })),
       downloads: filteredDownloads.map((d) => ({
-        downloadId: d.downloadId,
+        movieDownloadId: d.movieDownloadId,
         provedorName: d.provedorName,
         linkDownload: d.linkDownload,
       })),

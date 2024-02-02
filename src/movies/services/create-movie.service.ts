@@ -24,7 +24,7 @@ export class CreateMovieService {
     // Cria os downloads associados ao filme
     const createdDownloads = await Promise.all(
       downloads.map(async (download) =>
-        this.prisma.download.create({
+        this.prisma.movieDownloads.create({
           data: {
             ...download,
             movieId: await createdMovie.movieId,

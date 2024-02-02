@@ -1,14 +1,15 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MovieForId } from '../responses/schema';
 import { GetMovieService } from '../services/get-movie-id.service';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
-@ApiTags('movies')
+@ApiTags('Movies')
 @Controller('api')
-@ApiBearerAuth()
 export class GetMovieController {
   constructor(private readonly getMovieService: GetMovieService) {}
 
+  @IsPublic()
   @ApiResponse({
     status: 200,
     schema: {

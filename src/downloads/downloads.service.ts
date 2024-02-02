@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreateDownloadDto } from './dto/create-download.dto';
-import { UpdateDownloadDto } from './dto/update-download.dto';
+import { CreateDownloadDto } from './dto/create-movie-download.dto';
+import { UpdateDownloadDto } from './dto/update-movie-download.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class DownloadsService {
     // Cria os downloads associados ao filme
     const createdDownloads = await Promise.all(
       createDownloadDto.map((download) =>
-        this.prisma.download.create({
+        this.prisma.movieDownloads.create({
           data: download,
         }),
       ),
@@ -19,13 +19,12 @@ export class DownloadsService {
     return createdDownloads.map((download) => ({
       ...download,
       movieId: download.movieId ?? undefined,
-      serieId: download.serieId ?? undefined,
     }));
   }
 
-  async findOne(downloadId: number) {
-    const downloadExist = await this.prisma.download.findFirst({
-      where: { downloadId },
+  async findOne(movieDownloadId: number) {
+    const downloadExist = await this.prisma.movieDownloads.findFirst({
+      where: { movieDownloadId },
     });
 
     if (!downloadExist) {
@@ -35,41 +34,39 @@ export class DownloadsService {
     return {
       ...downloadExist,
       movieId: downloadExist.movieId ?? undefined,
-      serieId: downloadExist.serieId ?? undefined,
     };
   }
 
-  async update(downloadId: number, updateDownloadDto: UpdateDownloadDto) {
-    const downloadExist = await this.prisma.download.findFirst({
-      where: { downloadId },
+  async update(movieDownloadId: number, updateDownloadDto: UpdateDownloadDto) {
+    const downloadExist = await this.prisma.movieDownloads.findFirst({
+      where: { movieDownloadId },
     });
 
     if (!downloadExist) {
       throw new HttpException('Download not found', HttpStatus.NOT_FOUND);
     }
 
-    const updateDownload = await this.prisma.download.update({
-      where: { downloadId },
+    const updateDownload = await this.prisma.movieDownloads.update({
+      where: { movieDownloadId },
       data: updateDownloadDto,
     });
     return {
       ...updateDownload,
       movieId: updateDownload.movieId ?? undefined,
-      serieId: updateDownload.serieId ?? undefined,
     };
   }
 
-  async remove(downloadId: number) {
-    const downloadExist = await this.prisma.download.findFirst({
-      where: { downloadId },
+  async remove(movieDownloadId: number) {
+    const downloadExist = await this.prisma.movieDownloads.findFirst({
+      where: { movieDownloadId },
     });
 
     if (!downloadExist) {
       throw new HttpException('Download not found', HttpStatus.NOT_FOUND);
     }
-    return this.prisma.download.delete({
-      where: { downloadId },
-      select: { downloadId: true },
+    return this.prisma.movieDownloads.delete({
+      where: { movieDownloadId },
+      select: { movieDownloadId: true },
     });
   }
 }

@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateMovieDto } from '../dto/create-movie.dto';
 import { CreateMovieService } from '../services/create-movie.service';
 
-@ApiTags('movies')
+@ApiTags('Movies')
 @Controller('api')
 @ApiBearerAuth()
 export class CreateMovieController {

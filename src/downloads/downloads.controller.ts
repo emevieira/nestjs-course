@@ -9,12 +9,13 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DownloadsService } from './downloads.service';
-import { CreateDownloadDto } from './dto/create-download.dto';
-import { UpdateDownloadDto } from './dto/update-download.dto';
+import { CreateDownloadDto } from './dto/create-movie-download.dto';
+import { UpdateDownloadDto } from './dto/update-movie-download.dto';
 import { DownloadDeleteResponse, DownloadRequest } from './responses/schema';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
-@ApiTags('downloads')
-@Controller('api')
+@ApiTags('Movie Downloads')
+@Controller('api/movies')
 @ApiBearerAuth()
 export class DownloadsController {
   constructor(private readonly downloadsService: DownloadsService) {}
@@ -26,25 +27,26 @@ export class DownloadsController {
     return this.downloadsService.create(createDownloadDto);
   }
 
+  @IsPublic()
   @ApiResponse(DownloadRequest)
-  @Get('downloads/:downloadId')
-  findOne(@Param('downloadId') downloadId: string) {
-    return this.downloadsService.findOne(+downloadId);
+  @Get('downloads/:movieDownloadId')
+  findOne(@Param('movieDownloadId') movieDownloadId: string) {
+    return this.downloadsService.findOne(+movieDownloadId);
   }
 
   @ApiResponse(DownloadRequest)
   @ApiBody(DownloadRequest)
-  @Put('downloads/:downloadId')
+  @Put('downloads/:movieDownloadId')
   update(
-    @Param('downloadId') downloadId: string,
+    @Param('movieDownloadId') movieDownloadId: string,
     @Body() updateDownloadDto: UpdateDownloadDto,
   ) {
-    return this.downloadsService.update(+downloadId, updateDownloadDto);
+    return this.downloadsService.update(+movieDownloadId, updateDownloadDto);
   }
 
   @ApiResponse(DownloadDeleteResponse)
-  @Delete('downloads/:downloadId')
-  remove(@Param('downloadId') downloadId: string) {
-    return this.downloadsService.remove(+downloadId);
+  @Delete('downloads/:movieDownloadId')
+  remove(@Param('movieDownloadId') movieDownloadId: string) {
+    return this.downloadsService.remove(+movieDownloadId);
   }
 }

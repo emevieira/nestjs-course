@@ -9,7 +9,7 @@ import { UpdateMovie } from '../responses/schema';
 import { UpdateMovieDto } from '../dto/update-movie.dto';
 import { UpdateMovieService } from '../services/update-movie.service';
 
-@ApiTags('movies')
+@ApiTags('Movies')
 @Controller('api')
 @ApiBearerAuth()
 export class UpdateMovieController {

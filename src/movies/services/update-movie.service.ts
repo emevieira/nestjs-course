@@ -12,7 +12,7 @@ export class UpdateMovieService {
     });
 
     if (!movieExist) {
-      throw new HttpException('Movie not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Filme não encontrado', HttpStatus.NOT_FOUND);
     }
 
     const updateMovie = await this.prisma.movies.update({

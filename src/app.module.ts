@@ -8,6 +8,10 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { MoviesModule } from './movies/movies.module';
 import { DownloadsModule } from './downloads/downloads.module';
+import { CategoriesModule } from './categories/categories.module';
+import { SeasonsModule } from './seasons/seasons.module';
+import { SeriesModule } from './series/series.module';
+import { SeasonDownloadsModule } from './season-downloads/season-downloads.module';
 
 @Module({
   imports: [
@@ -16,6 +20,10 @@ import { DownloadsModule } from './downloads/downloads.module';
     AuthModule,
     MoviesModule,
     DownloadsModule,
+    CategoriesModule,
+    SeasonsModule,
+    SeriesModule,
+    SeasonDownloadsModule,
   ],
   controllers: [AppController],
   providers: [

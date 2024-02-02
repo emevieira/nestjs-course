@@ -1,11 +1,11 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { GetMoviesResponse } from '../responses/schema';
 import { GetMoviesService } from '../services/get-movies.service';
 
-@ApiTags('movies')
+@ApiTags('Movies')
 @Controller('api')
-@ApiBearerAuth()
 export class GetMoviesController {
   constructor(private readonly getMoviesService: GetMoviesService) {}
 
@@ -15,6 +15,7 @@ export class GetMoviesController {
       default: GetMoviesResponse,
     },
   })
+  @IsPublic()
   @ApiQuery({ name: 'filter', required: false, type: String })
   @ApiQuery({ name: 'categoryId', required: false, type: String })
   @ApiQuery({ name: 'itemsPerPage', type: Number, example: 10 })

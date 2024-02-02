@@ -14,8 +14,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Swagger - Api Tech Filmes')
-    .setDescription('Essa api é do site Tech Filmes')
+    .setTitle('Swagger - Api Filmes e Séries')
+    .setDescription('Essa é uma API de filmes e séries para download')
     .setVersion('1.0')
     .addBearerAuth()
     .setContact(
@@ -23,10 +23,14 @@ async function bootstrap() {
       'https://vieiradevcode.com.br',
       'emevieira.dev@gmail.com',
     )
-    .addTag('auth')
-    .addTag('downloads')
-    .addTag('movies')
-    .addTag('users')
+    .addTag('Auth')
+    .addTag('Categories')
+    .addTag('Movies')
+    .addTag('Movie Downloads')
+    .addTag('Seasons')
+    .addTag('Series')
+    .addTag('Users')
+    .setBasePath('http://localhost:3333')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

@@ -2,7 +2,7 @@ import { Controller, Delete, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteMovieService } from '../services/delete-movie.service';
 
-@ApiTags('movies')
+@ApiTags('Movies')
 @Controller('api')
 @ApiBearerAuth()
 export class DeleteMovieController {

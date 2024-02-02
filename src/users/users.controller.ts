@@ -20,7 +20,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 
-@ApiTags('users')
+@ApiTags('Users')
 @Controller('api')
 @ApiBearerAuth()
 export class UsersController {

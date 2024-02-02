@@ -12,7 +12,7 @@ import { IsPublic } from './decorators/is-public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthRequest } from './models/AuthRequest';
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('api')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
