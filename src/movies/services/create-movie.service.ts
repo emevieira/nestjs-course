@@ -9,6 +9,7 @@ export class CreateMovieService {
 
   async create(createMovieDto: CreateMovieDto): Promise<Movie> {
     const { downloads, ...dataMovie } = createMovieDto;
+
     const createdMovie = await this.prisma.movies.create({
       data: {
         name: dataMovie.name,
@@ -18,24 +19,25 @@ export class CreateMovieService {
         trailerLink: dataMovie.trailerLink,
         releaseYear: dataMovie.releaseYear,
         categoryId: dataMovie.categoryId,
+        Download: {
+          createMany: {
+            data: downloads.map((download) => {
+              return { ...download };
+            }),
+          },
+        },
       },
     });
 
-    // Cria os downloads associados ao filme
-    const createdDownloads = await Promise.all(
-      downloads.map(async (download) =>
-        this.prisma.movieDownloads.create({
-          data: {
-            ...download,
-            movieId: await createdMovie.movieId,
-          },
-        }),
-      ),
-    );
+    const filterDownloads = await this.prisma.movieDownloads.findMany({
+      where: {
+        movieId: createdMovie.movieId,
+      },
+    });
 
     return {
       ...createdMovie,
-      downloads: createdDownloads.map((d) => ({ ...d, serieId: undefined })),
+      downloads: filterDownloads,
     };
   }
 }

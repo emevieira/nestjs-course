@@ -22,6 +22,14 @@ export class GetMoviesService {
           contains: categoryId,
         },
       },
+      include: {
+        category: {
+          select: {
+            categoryId: true,
+            name: true,
+          },
+        },
+      },
       orderBy: {
         name: 'asc',
       },
@@ -33,7 +41,12 @@ export class GetMoviesService {
       totalItems: total,
       itemsPerPage: Number(itemsPerPage),
       page: Number(page),
-      items: (await movies).map((m) => ({ ...m })),
+      items: (await movies).map((m) => ({
+        ...m,
+        categoryId: undefined,
+        category: undefined,
+        categories: m.category,
+      })),
     };
 
     return metadata;

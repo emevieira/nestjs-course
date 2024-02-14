@@ -1,11 +1,12 @@
 import { IsArray, IsString } from 'class-validator';
+import { Movie } from '../entities/movie.entity';
 
 class DownloadTypes {
   provedorName: string;
   linkDownload: string;
 }
 
-export class CreateMovieDto {
+export class CreateMovieDto extends Movie {
   /**
    * Nome do filme
    * @example Transformers
